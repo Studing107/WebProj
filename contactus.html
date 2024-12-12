@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>SpongeBob | Contact Us</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none; /* 默认隐藏 */
+        }
+        
+        .form-group .error.show {
+            display: block; /* 显示错误信息 */
+        }
+        </style>
+</head>
+
+<body>
+    <div class="top">
+        <ul class="loginbar clearboth container">
+            <li><a href="index.html">SPONGE<span>BOB.</span></a></li>
+            <li>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="rigister.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </div>
+    <div id="header">
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav clearboth container nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="role_intro.html">Character</a></li>
+            <li><a href="atlas.html">Gallery</a></li>
+            <li><a href="video.html">Online Videos</a></li>
+            <li><a href="classicline.html">Classic Quotes</a></li>
+            <li><a href="awards.html">Awards</a></li>
+            <li><a href="contactus.html" class="current-nav">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="contactus-banner clear"></div>
+    <div class="container">
+        <div class="column-title">
+            <h3>Contact Us</h3>
+        </div>
+        <ul class="email-box">
+            <li>Email: spongebob@123.com</li>
+            <li>Phone: 010-12345678</li>
+            <li>Mobile: 123 4567 8901</li>
+            <li>Address: 124 Shell Street, Bikini Bottom, Pacific Ocean</li>
+            <li><a href="mailto:spongebob@123.com" style="color: black;text-decoration: none;">Click here to send an email</a></li>
+        </ul>
+        <div class="column-title">
+            <h3>Message Center</h3>
+        </div>
+        <form action="" class="leave-message" id="contactForm">
+            <div class="form-group">
+                <label for="username">Name:</label>
+                <input type="text" id="username" class="userbar" required>
+                <span class="error" id="nameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="userphone">Phone:</label>
+                <input type="tel" id="userphone" class="userbar" pattern="[0-9]{11}" required>
+                <span class="error" id="phoneError"></span>
+            </div>
+            <div class="form-group">
+                <label for="useremail">Email:</label>
+                <input type="email" id="useremail" class="useremail" required>
+                <span class="error" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="usermessage">Message:</label>
+                <textarea name="usermessage" id="usermessage" class="mesagebar"></textarea>
+            </div>
+            <div class="submitbar">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </div>
+        </form>
+    </div>
+    <div class="copyright">
+        Copyright©2024My.All Rights Reserved
+    </div>
+</body>
+<script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-menu').classList.toggle('active');
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const usernameInput = document.getElementById('username');
+    const userphoneInput = document.getElementById('userphone');
+    const useremailInput = document.getElementById('useremail');
+    const nameError = document.getElementById('nameError');
+    const phoneError = document.getElementById('phoneError');
+    const emailError = document.getElementById('emailError');
+
+    // Helper function to clear error messages
+    function clearErrors() {
+        nameError.classList.remove('show');
+        phoneError.classList.remove('show');
+        emailError.classList.remove('show');
+        nameError.textContent = '';
+        phoneError.textContent = '';
+        emailError.textContent = '';
+    }
+
+    // Function to validate the form and show errors
+    function validateField(input, errorSpan, validationFunc, errorMsg) {
+        clearErrors(); // Clear all errors first
+
+        if (!validationFunc(input.value.trim())) {
+            errorSpan.textContent = errorMsg;
+            errorSpan.classList.add('show');
+            return false;
+        }
+        return true;
+    }
+
+    // Validation functions
+    function validateName(value) {
+        return value !== '';
+    }
+
+    function validatePhone(value) {
+        return /^\d{11}$/.test(value);
+    }
+
+    function validateEmail(value) {
+        return /\S+@\S+\.\S+/.test(value);
+    }
+
+    // Add focus event listeners for real-time validation feedback
+    usernameInput.addEventListener('focus', () => validateField(usernameInput, nameError, validateName, 'Name cannot be empty.'));
+    userphoneInput.addEventListener('focus', () => validateField(userphoneInput, phoneError, validatePhone, 'Phone must be 11 digits long.'));
+    useremailInput.addEventListener('focus', () => validateField(useremailInput, emailError, validateEmail, 'Please enter a valid email address.'));
+
+    // Add input event listeners for real-time validation feedback
+    usernameInput.addEventListener('input', () => validateField(usernameInput, nameError, validateName, 'Name cannot be empty.'));
+    userphoneInput.addEventListener('input', () => validateField(userphoneInput, phoneError, validatePhone, 'Phone must be 11 digits long.'));
+    useremailInput.addEventListener('input', () => validateField(useremailInput, emailError, validateEmail, 'Please enter a valid email address.'));
+
+    // Add submit event listener to validate the form before submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let isValid = true;
+
+        isValid &= validateField(usernameInput, nameError, validateName, 'Name cannot be empty.');
+        isValid &= validateField(userphoneInput, phoneError, validatePhone, 'Phone must be 11 digits long.');
+        isValid &= validateField(useremailInput, emailError, validateEmail, 'Please enter a valid email address.');
+
+        if (isValid) {
+            this.submit();
+        }
+    });
+});
+
+
+</script>
+</html>

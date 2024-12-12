@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>SpongeBob | Login</title>
+    <style>
+        .rigister-form {
+            width: 280px; /* 调整为更小的宽度 */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-box">
+        <div class="top">
+            <ul class="loginbar clearboth container">
+                <li><a href="index.html">SPONGE<span>BOB.</span></a></li>
+                <li>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="rigister.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+        <form action="" class="rigister-form" onsubmit="validateForm(event)">
+            <h2>Login</h2>
+            <div class="account-bar">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Please enter your username">
+            </div>
+            <div class="account-bar">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Please enter your password">
+            </div>
+            <div class="submit-bar" style="display: flex; align-items: center; justify-content: center; height: 100px;">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.length < 10) {
+                alert("Username length must be at least 10 characters!");
+                return;
+            }
+
+            if (password.length < 10) {
+                alert("Password length must be at least 10 characters!");
+                return;
+            }
+
+            if (!/^[A-Za-z]/.test(password)) {
+                alert("Password must start with a letter!");
+                return;
+            }
+
+            // If all validations pass, you can perform other actions here, such as submitting form data
+            alert("Form validation successful!");
+            // Here you can add the actual form submission logic, such as submitting data via AJAX
+        }
+    </script>
+</body>
+</html>
